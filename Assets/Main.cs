@@ -5,9 +5,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+// 인하대학교 소프트웨어융합공학과
+// 12184010 최순형
+
 public class Main : MonoBehaviour
 {
-    
     private const float DEG2RAD = 3.14159f/180;
     
     [SerializeField] private Text sampleCountInput;
@@ -46,7 +48,6 @@ public class Main : MonoBehaviour
         GL.Vertex(new Vector3( 0.5f, 0, 0));
         GL.Vertex(new Vector3( 0.5f, 1, 0));
         GL.End();
-        
         
         // square
         DrawSquare(new Vector2(0.5f + squareWidth / 2, 0.5f + squareHeight / 2), squareWidth, squareHeight, Color.black);
@@ -125,10 +126,12 @@ public class Main : MonoBehaviour
         
         for (int i = 0; i < sampleCount; i++)
         {
-            var samplePos = new Vector2(Random.Range(0.5001f, 0.5f + squareWidth), Random.Range(0.5001f, 0.5f + squareHeight));
+            var samplePos = new Vector2(Random.Range(0.501f, 0.499f + squareWidth), Random.Range(0.501f, 0.499f + squareHeight));
 
-            if (Vector2.Distance(samplePos, new Vector2(0.5f, 0.5f)) < 
-                Vector2.Distance(new Vector2(circleRadius / Screen.width, circleRadius / squareHeight), new Vector2(0.5f, 0.5f)))
+            var sampleDist = Vector2.Distance(new Vector2(0.5f * Screen.width, 0.5f * Screen.height),
+                new Vector2(samplePos.x * Screen.width, samplePos.y * Screen.height));
+           
+            if (sampleDist < circleRadius)
             {
                 samplePosInCircleList.Add(samplePos);
                 sampleInCircle++;
